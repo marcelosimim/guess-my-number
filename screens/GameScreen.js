@@ -1,5 +1,23 @@
-import { Text } from "react-native"
+import { Text, StyleSheet, View } from "react-native"
+import Title from "../components/Title"
 
 export default function GameScreen() {
-    return <Text>Game Screen</Text>
+    return (
+        <View style={styles.screen}>
+            <Title>Palpite do Oponente</Title>
+            {/* Guess */}
+            <View>
+                
+                {/* + - */}
+            </View>
+            {/* <View>LOG ROUNDS</View> */}
+        </View>
+    )
 }
+
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        padding: 12
+    }
+})
