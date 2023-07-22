@@ -10,17 +10,25 @@ export default function StartGameScreen() {
             autoCapitalize='nome'
             autoCorrect={false}
         />
-        <PrimaryButton>Reset</PrimaryButton>
-        <PrimaryButton>Confirm</PrimaryButton>
+        <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton>Reset</PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton>Confirm</PrimaryButton>
+            </View>
+        </View>
+        
     </View>
 }
 
 const styles = StyleSheet.create({
     inputContainer: {
+        alignItems: 'center',
         marginTop: 100,
         marginHorizontal: 24,
         padding: 16,
-        backgroundColor: '#4e0329',
+        backgroundColor: '#3b021f',
         borderRadius: 8,
         //android
         elevation: 4, 
@@ -40,5 +48,11 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+    },
+    buttonContainer: {
+        flex: 1
     }
 })
