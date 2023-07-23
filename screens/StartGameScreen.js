@@ -1,4 +1,12 @@
-import { TextInput, View, StyleSheet, Alert } from 'react-native'
+import { 
+    TextInput, 
+    View, 
+    StyleSheet, 
+    Alert, 
+    useWindowDimensions,
+    KeyboardAvoidingView,
+    ScrollView
+} from 'react-native'
 import { useState } from 'react'
 import PrimaryButton from '../components/ui/PrimaryButton'
 import Colors from '../constants/Colors'
@@ -8,6 +16,8 @@ import InstructionText from '../components/ui/InstructionText'
 
 export default function StartGameScreen({onPickNumber}) {
     const [enteredNumber, setEnteredNumber] = useState('')
+
+    const { width, height } = useWindowDimensions()
 
     function numberInputHandler(enteredText) {
         setEnteredNumber(enteredText)
@@ -32,38 +42,47 @@ export default function StartGameScreen({onPickNumber}) {
         setEnteredNumber('')
     }
 
+    const marginTopDistance = height < 380 ? 30 : 100
+
     return (
-        <View style={styles.rootContainer}>
-            <Title>Adivinhe Meu Número</Title>
-            <Card>
-                <InstructionText>Insira um número</InstructionText>
-                <TextInput 
-                    style={styles.numberInput}
-                    maxLength={2}
-                    keyboardType='number-pad'
-                    autoCapitalize='nome'
-                    autoCorrect={false}
-                    onChangeText={numberInputHandler}
-                    value={enteredNumber}
-                />
-                <View style={styles.buttonsContainer}>
-                    <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={resetInputHandler}>Limpar</PrimaryButton>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={confirmInputHandler}>Confimar</PrimaryButton>
-                    </View>
+        <ScrollView>
+            <KeyboardAvoidingView style={styles.screen} behavior='position'>
+                <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+                    <Title>Adivinhe Meu Número</Title>
+                    <Card>
+                        <InstructionText>Insira um número</InstructionText>
+                        <TextInput 
+                            style={styles.numberInput}
+                            maxLength={2}
+                            keyboardType='number-pad'
+                            autoCapitalize='nome'
+                            autoCorrect={false}
+                            onChangeText={numberInputHandler}
+                            value={enteredNumber}
+                        />
+                        <View style={styles.buttonsContainer}>
+                            <View style={styles.buttonContainer}>
+                                <PrimaryButton onPress={resetInputHandler}>Limpar</PrimaryButton>
+                            </View>
+                            <View style={styles.buttonContainer}>
+                                <PrimaryButton onPress={confirmInputHandler}>Confimar</PrimaryButton>
+                            </View>
+                        </View>
+                        
+                    </Card>
                 </View>
-                
-            </Card>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
+       
     )
 }
 
 const styles = StyleSheet.create({
+    screen: { 
+        flex: 1,
+    },
     rootContainer: {
         flex: 1,
-        marginTop: 100,
         alignItems: 'center'
     },
     numberInput: {
